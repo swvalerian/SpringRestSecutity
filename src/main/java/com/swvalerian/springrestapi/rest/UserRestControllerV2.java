@@ -1,7 +1,6 @@
 package com.swvalerian.springrestapi.rest;
 
 import com.swvalerian.springrestapi.model.User;
-import com.swvalerian.springrestapi.repository.UserRepository;
 import com.swvalerian.springrestapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v2/users/")
+@RequestMapping("/api/v2/users")
 public class UserRestControllerV2 {
 
     @Autowired
@@ -42,7 +41,6 @@ public class UserRestControllerV2 {
         return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
-    // вот надо организовать так как сделал, или добавить возможность присвоения файла?
     @PostMapping
     public ResponseEntity<User> saveUser(@ModelAttribute("userModel") User user) {
         this.userService.save(user);

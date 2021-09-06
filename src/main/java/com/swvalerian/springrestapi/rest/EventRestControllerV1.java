@@ -11,12 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/events")
+@RequestMapping("/api/v1/events")
 public class EventRestControllerV1 {
-    // необходимо будет использовать в методах создания, удаления и изменения
-    // LocalDateTime pCreated = LocalDateTime.now();
-
-    // далее так же изменить другие рест контроллеры, не удалять - а на месте ссылки на файл - надпись DELETED
 
     @Autowired
     private EventService eventService;

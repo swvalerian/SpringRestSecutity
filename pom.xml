@@ -44,6 +44,11 @@
             <!--      <version>${spring.version}</version>-->
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
         <!--        MySQL       -->
         <dependency>
             <groupId>mysql</groupId>
@@ -66,7 +71,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-<!--                <version>2.5.3</version>-->
+                <version>2.5.3</version>
             </plugin>
 
             <!--Подключаем flyway для миграции БД (добавление и настройка плагина достаточно для работы) -->

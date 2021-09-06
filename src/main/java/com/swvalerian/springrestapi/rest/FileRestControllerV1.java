@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/v1/files/")
+@RequestMapping(value = "/api/v1/files")
 public class FileRestControllerV1 {
 
     @Autowired
@@ -47,10 +47,17 @@ public class FileRestControllerV1 {
     public void deleteFileById(@RequestParam("id") Long fileId) {
         LocalDateTime deleteTime = LocalDateTime.now();
 
+        // пометим файл как удаленный
+        File file = this.fileService.getId(fileId);
+        file.setLocation(file.getLocation() + " DELETED");
+
+        fileService.update(file);
+
         Event event = this.eventService.getAll().stream()
                 .filter(f -> f.getFile().getId().equals(fileId))
                 .findFirst().orElse(null);
 
+        // а так же отметим в таблице событий, дату удаления файла
         event.setDeleted(deleteTime);
 
         this.eventService.update(event);

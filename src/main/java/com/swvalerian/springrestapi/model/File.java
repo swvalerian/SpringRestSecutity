@@ -15,7 +15,6 @@ import javax.persistence.Table;
 
 @Entity
 @Data
-//@NoArgsConstructor
 
 @Table(name = "files")
 public class File extends BaseEntity {
