@@ -14,7 +14,7 @@ import java.util.List;
 public class UserService implements BaseService<User, Long> {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public User getId(Long id) {

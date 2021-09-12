@@ -10,6 +10,7 @@ import com.swvalerian.springrestapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,7 @@ public class FileRestControllerV1 {
 
 
     @GetMapping
+    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('user:read')")
     public ResponseEntity<List<File>> getAllFiles() {
         List<File> fileList = this.fileService.getAll();
 
@@ -38,12 +40,14 @@ public class FileRestControllerV1 {
     }
 
     @GetMapping("{id}")
+    @PreAuthorize("hasAuthority('admin:read') or hasAuthority('user:read')")
     public ResponseEntity<File> getFileById(@PathVariable("id") Long id) {
         File file = this.fileService.getId(id);
         return new ResponseEntity<>(file, HttpStatus.OK);
     }
 
     @DeleteMapping
+    @PreAuthorize("hasAuthority('admin:write') or hasAuthority('moder:write')")
     public void deleteFileById(@RequestParam("id") Long fileId) {
         LocalDateTime deleteTime = LocalDateTime.now();
 
@@ -64,6 +68,7 @@ public class FileRestControllerV1 {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('admin:write') or hasAuthority('moder:write')")
     public ResponseEntity<File> saveFile(@RequestParam("location") String location, @RequestParam("userName") String userName) {
         LocalDateTime createTime = LocalDateTime.now();
 
@@ -76,6 +81,7 @@ public class FileRestControllerV1 {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('admin:write')")
     public ResponseEntity<List<File>> updateFile(@RequestParam("id") Long id, @RequestParam("location") String location) {
         LocalDateTime updateTime = LocalDateTime.now();
 

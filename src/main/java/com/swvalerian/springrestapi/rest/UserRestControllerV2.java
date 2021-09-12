@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,9 @@ public class UserRestControllerV2 {
     @Autowired
     private UserService userService;
 
+
     @RequestMapping(value = "{userId}", method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('admin:read')")
     public ResponseEntity<User> getUserById(@PathVariable Long userId) {
         HttpHeaders httpHeaders = new HttpHeaders();
 
@@ -36,18 +39,21 @@ public class UserRestControllerV2 {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("hasAuthority('admin:read')")
     public ResponseEntity<List<User>> getAllUser() {
         List<User> userList = this.userService.getAll();
         return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('admin:write')")
     public ResponseEntity<User> saveUser(@ModelAttribute("userModel") User user) {
         this.userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('admin:write')")
     public ResponseEntity<List<User>> updateUser(@ModelAttribute("userModel") User user) {
         this.userService.update(user);
         List<User> userList = this.userService.getAll();
@@ -55,6 +61,7 @@ public class UserRestControllerV2 {
     }
 
     @DeleteMapping(value = "{id}")
+    @PreAuthorize("hasAuthority('admin:write')")
     public void deleteUser(@PathVariable("id") Long userId) {
         User user = userService.getId(userId);
         user.setName(user.getName() + "DELETED");

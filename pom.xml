@@ -15,13 +15,14 @@
         <!--    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
         <!--    <maven.compiler.source>1.8</maven.compiler.source>-->
         <!--    <maven.compiler.target>1.8</maven.compiler.target>-->
-<!--        <spring.version>2.5.3</spring.version>-->
+        <!--        <spring.version>2.5.3</spring.version>-->
     </properties>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.12.RELEASE</version>
+        <version>2.5.4</version>
+<!--        <version>2.5.12.RELEASE</version>-->
     </parent>
 
     <dependencies>
@@ -47,6 +48,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!--        JSON Web Token      -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
         </dependency>
 
         <!--        MySQL       -->
@@ -86,6 +94,15 @@
                     <password>QWERTgfdsa1980</password>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>9</source>
+                    <target>9</target>
+                </configuration>
+            </plugin>
         </plugins>
 
         <!--   Без этих зависимостей не работал flyway-миграция     -->
@@ -95,47 +112,47 @@
         <!--   иначе ошибка:     -->
         <!--   Unable to determine URL for classpath location: db/migration (ClassLoader: ClassRealm[plugin>com.googlecode.flyway:flyway-maven-plugin:2.3.1, parent: jdk.internal.loader.ClassLoaders$AppClassLoader@2437c6dc])-->
 
-<!-- ПО итогу разобрался уже при отладке проекта! Оказывается было несовместимость типов Long = BIGINT-->
-<!--     А так же опять была трабла с миграцией int<>BIGINT    -->
+        <!-- ПО итогу разобрался уже при отладке проекта! Оказывается было несовместимость типов Long = BIGINT-->
+        <!--     А так же опять была трабла с миграцией int<>BIGINT    -->
 
 
-<!--                <pluginManagement>&lt;!&ndash; lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) &ndash;&gt;-->
-<!--                    <plugins>-->
-<!--                        <plugin>-->
-<!--                            <artifactId>maven-clean-plugin</artifactId>-->
-<!--                            <version>3.1.0</version>-->
-<!--                        </plugin>-->
-<!--                        &lt;!&ndash; see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging &ndash;&gt;-->
-<!--                        <plugin>-->
-<!--                            <artifactId>maven-resources-plugin</artifactId>-->
-<!--                            <version>3.0.2</version>-->
-<!--                        </plugin>-->
-<!--                        <plugin>-->
-<!--                            <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                            <version>3.8.0</version>-->
-<!--                            <configuration>-->
-<!--                                <source>8</source>-->
-<!--                                <target>8</target>-->
-<!--                            </configuration>-->
-<!--                        </plugin>-->
-<!--                        <plugin>-->
-<!--                            <artifactId>maven-surefire-plugin</artifactId>-->
-<!--                            <version>2.22.1</version>-->
-<!--                        </plugin>-->
-<!--                        <plugin>-->
-<!--                            <artifactId>maven-war-plugin</artifactId>-->
-<!--                            <version>3.2.2</version>-->
-<!--                        </plugin>-->
-<!--                        <plugin>-->
-<!--                            <artifactId>maven-install-plugin</artifactId>-->
-<!--                            <version>2.5.2</version>-->
-<!--                        </plugin>-->
-<!--                        <plugin>-->
-<!--                            <artifactId>maven-deploy-plugin</artifactId>-->
-<!--                            <version>2.8.2</version>-->
-<!--                        </plugin>-->
-<!--                    </plugins>-->
-<!--                </pluginManagement>-->
+        <!--                <pluginManagement>&lt;!&ndash; lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) &ndash;&gt;-->
+        <!--                    <plugins>-->
+        <!--                        <plugin>-->
+        <!--                            <artifactId>maven-clean-plugin</artifactId>-->
+        <!--                            <version>3.1.0</version>-->
+        <!--                        </plugin>-->
+        <!--                        &lt;!&ndash; see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging &ndash;&gt;-->
+        <!--                        <plugin>-->
+        <!--                            <artifactId>maven-resources-plugin</artifactId>-->
+        <!--                            <version>3.0.2</version>-->
+        <!--                        </plugin>-->
+        <!--                        <plugin>-->
+        <!--                            <artifactId>maven-compiler-plugin</artifactId>-->
+        <!--                            <version>3.8.0</version>-->
+        <!--                            <configuration>-->
+        <!--                                <source>8</source>-->
+        <!--                                <target>8</target>-->
+        <!--                            </configuration>-->
+        <!--                        </plugin>-->
+        <!--                        <plugin>-->
+        <!--                            <artifactId>maven-surefire-plugin</artifactId>-->
+        <!--                            <version>2.22.1</version>-->
+        <!--                        </plugin>-->
+        <!--                        <plugin>-->
+        <!--                            <artifactId>maven-war-plugin</artifactId>-->
+        <!--                            <version>3.2.2</version>-->
+        <!--                        </plugin>-->
+        <!--                        <plugin>-->
+        <!--                            <artifactId>maven-install-plugin</artifactId>-->
+        <!--                            <version>2.5.2</version>-->
+        <!--                        </plugin>-->
+        <!--                        <plugin>-->
+        <!--                            <artifactId>maven-deploy-plugin</artifactId>-->
+        <!--                            <version>2.8.2</version>-->
+        <!--                        </plugin>-->
+        <!--                    </plugins>-->
+        <!--                </pluginManagement>-->
 
     </build>
 
